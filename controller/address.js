@@ -16,12 +16,12 @@ exports.createAdress = (req, res) => {
     return res.status(400).json({
       status: "fail",
       error: "Provide all the fields",
-      data: req.body,
+      address: req.body,
     });
   }
   const address = { id: v4(), name, city };
   addresses.push(address);
-  res.status(201).json({ status: "success", error: "", data: address });
+  res.status(201).json({ status: "success", error: "", address });
 };
 
 //DELETE ADDRESS
@@ -36,7 +36,7 @@ exports.deleteAddress = (req, res) => {
     });
   }
   addresses = addresses.filter((adds) => adds.id !== id);
-  res.status(200).json({ status: "success", error: "", data: address });
+  res.status(200).json({ status: "success", error: "", address });
 };
 
 //UPDATE ADDRESS
@@ -67,5 +67,9 @@ exports.updateAddress = (req, res) => {
 
   res
     .status(200)
-    .json({ status: "success", error: "", data: { ...address, city, name } });
+    .json({
+      status: "success",
+      error: "",
+      address: { ...address, city, name },
+    });
 };
