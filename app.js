@@ -11,6 +11,6 @@ app.use(cors())
 //routes
 app.use('/api', addressRouter)
 
-app.listen(port, () => {
+app.listen(process.env.PORT||port, () => {
   console.log(`AddressBook app listening on port ${port}`);
 });
