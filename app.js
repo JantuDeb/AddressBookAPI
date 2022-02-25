@@ -2,7 +2,7 @@ const express = require("express");
 const addressRouter = require("./routes/address")
 const cors = require('cors')
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // middlewares
 app.use(express.json())

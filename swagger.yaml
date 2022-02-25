@@ -1,0 +1,198 @@
+openapi: 3.0.0
+info:
+  title: Address Book
+  description: Create, read, delete and update addresses.
+  version: 1.0.0
+
+servers:
+  - url: https://address-book-rest-api.herokuapp.com/api/
+    description: This is the url of hosted api
+  - url: http://localhost:3001/api
+    description: localhost version of our app
+
+paths:
+  /addresses:
+    get:
+      summary: Returns a list of addresses.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A object with a JSON array of addresses name and city
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  error:
+                    type: string
+                    example: error
+                  addresses: 
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "4"
+                        name:
+                          type: string
+                          example: Jantu
+                        city:
+                          type: string
+                          example: city name
+    post:
+      summary: create an address with provoded data.
+      description: This will return an object which includes status of success and an address object.
+      requestBody:
+        required: true
+        description: An object with name and city
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name: 
+                  type: string
+                  example: name
+                city:
+                  type: string
+                  example: city name  
+      responses:
+        '201':
+          description: This will return an object which includes status of success and an address object 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  error:
+                    type: string
+                    example: error 
+                  address:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "4"
+                      name:
+                        type: string
+                        example: Jantu
+                      city:
+                        type: string
+                        example: city name
+  /addresses/{id}:
+      delete:
+        summary: Deletes a address with the provided id.
+        # description: Optional extended description in CommonMark or HTML.
+        parameters:
+          - in: path
+            name: id
+            required: true
+        responses:
+          '200':    # status code
+            description: This will return an object which includes status of success and an address object 
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
+                    error:
+                      type: string
+                      example: error
+                    address: 
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "4"
+                        name:
+                          type: string
+                          example: Jantu
+                        city:
+                          type: string
+                          example: city name
+      patch:
+        summary: Updates an address with the provided id.
+        # description: Optional extended description in CommonMark or HTML.
+        parameters:
+          - in: path
+            name: id
+            required: true
+        requestBody:
+          required: true
+          description: An object with name and city
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: name
+                  city:
+                    type: string
+                    example: city name  
+        responses:
+          '200':    # status code
+            description: This will return an object which includes status of success and an address object 
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
+                    error:
+                      type: string
+                      example: error
+                    address: 
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "4"
+                        name:
+                          type: string
+                          example: Jantu
+                        city:
+                          type: string
+                          example: city name
+          '404':    # status code
+            description: This will return an object with error 
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
+                    error:
+                      type: string
+                      example: error
+                    address: 
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "4"
+                        name:
+                          type: string
+                          example: Jantu
+                        city:
+                          type: string
+                          example: city name
+                      
+                      
+
+
