@@ -19,7 +19,7 @@ exports.createAdress = (req, res) => {
       address: req.body,
     });
   }
-  const address = { id: v4(), name, city };
+  const address = { id: v4(), name, phone, pincode, state, city, addressLine1 };
   addresses.push(address);
   res.status(201).json({ status: "success", error: "", address });
 };
