@@ -11,8 +11,8 @@ exports.readAddresses = (req, res) => {
 
 // SAVE ADRESSES
 exports.createAdress = (req, res) => {
-  const { name, city } = req.body;
-  if (!name || !city) {
+  const { name, phone, pincode, state, city, addressLine1 } = req.body;
+  if (!name || !city || !phone || !pincode || !state || !addressLine1) {
     return res.status(400).json({
       status: "fail",
       error: "Provide all the fields",
@@ -42,9 +42,9 @@ exports.deleteAddress = (req, res) => {
 //UPDATE ADDRESS
 exports.updateAddress = (req, res) => {
   const { id } = req.params;
-  const { name, city } = req.body;
+  const { name, phone, pincode, state, city, addressLine1 } = req.body;
 
-  if (!name || !city || !id) {
+  if (!name || !id || !city || !phone || !pincode || !state || !addressLine1) {
     return res.status(400).json({
       status: "fail",
       error: "Provide name and city",
@@ -62,14 +62,14 @@ exports.updateAddress = (req, res) => {
   }
 
   addresses = addresses.map((adds) =>
-    adds.id === id ? { ...address, name, city } : adds
+    adds.id === id
+      ? { ...address, name, phone, pincode, state, city, addressLine1 }
+      : adds
   );
 
-  res
-    .status(200)
-    .json({
-      status: "success",
-      error: "",
-      address: { ...address, city, name },
-    });
+  res.status(200).json({
+    status: "success",
+    error: "",
+    address: { ...address, name, phone, pincode, state, city, addressLine1 },
+  });
 };
